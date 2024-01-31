@@ -83,7 +83,7 @@ interface ConfigurationInterface
     /**
      * get HTTP cookie file name.
      */
-    public function getCookieFile(): mixed;
+    public function getCookieFile(): ?string;
 
     /**
      * Proxy server.
