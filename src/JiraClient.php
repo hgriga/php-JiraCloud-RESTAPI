@@ -124,13 +124,13 @@ class JiraClient
     }
 
     /**
-     * @param \CurlHandle|bool $ch
+     * @param resource|bool $ch
      * @param array            $curl_http_headers
      * @param string|null      $cookieFile
      *
      * @return array
      */
-    public function curlPrepare(bool $ch, array $curl_http_headers, ?string $cookieFile): array
+    public function curlPrepare($ch, array $curl_http_headers, ?string $cookieFile): array
     {
         $this->authorization($ch, $curl_http_headers, $cookieFile);
 
