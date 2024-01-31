@@ -33,8 +33,9 @@ class JiraClient
 
     /**
      * CURL instance.
+     * @var resource $curl
      */
-    protected \CurlHandle $curl;
+    protected $curl;
 
     /**
      * Monolog instance.
@@ -288,8 +289,10 @@ class JiraClient
 
     /**
      * Create upload handle.
+     *
+     * @return resource
      */
-    private function createUploadHandle(string $url, string $upload_file, \CurlHandle $ch): \CurlHandle
+    private function createUploadHandle(string $url, string $upload_file, $ch)
     {
         $curl_http_headers = [
             'Accept: */*',
@@ -377,7 +380,10 @@ class JiraClient
         return $results;
     }
 
-    protected function closeCURLHandle(array $chArr, \CurlMultiHandle $mh, string $body, int $result_code): void
+    /**
+     * @param resource $mh
+     */
+    protected function closeCURLHandle(array $chArr, $mh, string $body, int $result_code): void
     {
         foreach ($chArr as $ch) {
             $this->log->debug('CURL Close handle..');
@@ -403,8 +409,10 @@ class JiraClient
 
     /**
      * Add authorize to curl request.
+     *
+     * @param resource $ch
      */
-    protected function authorization(\CurlHandle $ch, array &$curl_http_headers, string $cookieFile = null): void
+    protected function authorization($ch, array &$curl_http_headers, string $cookieFile = null): void
     {
         // use cookie
         if ($this->getConfiguration()->isCookieAuthorizationEnabled()) {
@@ -559,8 +567,10 @@ class JiraClient
 
     /**
      * Config a curl handle with proxy configuration (if set) from ConfigurationInterface.
+     *
+     * @param resource $ch
      */
-    private function proxyConfigCurlHandle(\CurlHandle $ch): void
+    private function proxyConfigCurlHandle($ch): void
     {
         // Add proxy settings to the curl.
         if ($this->getConfiguration()->getProxyServer()) {
