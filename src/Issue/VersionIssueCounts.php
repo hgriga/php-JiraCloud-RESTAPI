@@ -25,35 +25,35 @@ class VersionIssueCounts implements \JsonSerializable
         return array_filter(get_object_vars($this));
     }
 
-    public function setSelf(string $self): static
+    public function setSelf(string $self): self
     {
         $this->self = $self;
 
         return $this;
     }
 
-    public function setIssuesFixedCount(int $issuesFixedCount): static
+    public function setIssuesFixedCount(int $issuesFixedCount): self
     {
         $this->issuesFixedCount = $issuesFixedCount;
 
         return $this;
     }
 
-    public function setIssuesAffectedCount(int $issuesAffectedCount): static
+    public function setIssuesAffectedCount(int $issuesAffectedCount): self
     {
         $this->issuesAffectedCount = $issuesAffectedCount;
 
         return $this;
     }
 
-    public function setIssueCountWithCustomFieldsShowingVersion(int $issueCountWithCustomFieldsShowingVersion): static
+    public function setIssueCountWithCustomFieldsShowingVersion(int $issueCountWithCustomFieldsShowingVersion): self
     {
         $this->issueCountWithCustomFieldsShowingVersion = $issueCountWithCustomFieldsShowingVersion;
 
         return $this;
     }
 
-    public function setCustomFieldUsage(array $customFieldUsage): static
+    public function setCustomFieldUsage(array $customFieldUsage): self
     {
         $this->customFieldUsage = $customFieldUsage;
 

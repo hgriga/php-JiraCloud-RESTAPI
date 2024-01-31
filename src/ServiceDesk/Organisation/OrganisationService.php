@@ -28,11 +28,13 @@ class OrganisationService
     }
 
     /**
+     * @param array|string $data
+     *
      * @throws JsonMapper_Exception|JiraException|JsonException
      *
      * @see https://docs.atlassian.com/jira-servicedesk/REST/3.6.2/#servicedeskapi/organization-createOrganization
      */
-    public function create(array|string $data): Organisation
+    public function create($data): Organisation
     {
         if (is_array($data)) {
             $data = json_encode($data, JSON_THROW_ON_ERROR);

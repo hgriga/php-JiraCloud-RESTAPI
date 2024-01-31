@@ -45,7 +45,7 @@ class IssueLink implements \JsonSerializable
      *
      * @return $this
      */
-    public function setInwardIssueByKey(string $issueKey): static
+    public function setInwardIssueByKey(string $issueKey): self
     {
         if ($this->inwardIssue === null) {
             $this->inwardIssue = new LinkedIssue();
@@ -60,7 +60,7 @@ class IssueLink implements \JsonSerializable
      *
      * @return $this
      */
-    public function setOutwardIssueByKey(string $issueKey): static
+    public function setOutwardIssueByKey(string $issueKey): self
     {
         if ($this->outwardIssue === null) {
             $this->outwardIssue = new LinkedIssue();
@@ -76,7 +76,7 @@ class IssueLink implements \JsonSerializable
      *
      * @return $this
      */
-    public function setCommentAsADF(?AtlassianDocumentFormat $comment): static
+    public function setCommentAsADF(?AtlassianDocumentFormat $comment): self
     {
         if (!empty($comment)) {
             $this->comment['body'] = $comment;

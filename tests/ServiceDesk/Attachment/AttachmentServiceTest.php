@@ -91,7 +91,7 @@ class AttachmentServiceTest extends TestCase
     /**
      * @return ServiceDeskClient|MockObject
      */
-    private function createClient(): MockObject|ServiceDeskClient
+    private function createClient()
     {
         $mapper = new JsonMapper();
 

@@ -146,7 +146,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Attachment[]
      */
-    public function addAttachments(int|string $issueIdOrKey, array|string $filePathArray): array
+    public function addAttachments($issueIdOrKey, $filePathArray): array
     {
         if (!is_array($filePathArray)) {
             $filePathArray = [$filePathArray];
@@ -187,7 +187,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string created issue key
      */
-    public function update(int|string $issueIdOrKey, IssueField $issueField, array $paramArray = []): string
+    public function update($issueIdOrKey, IssueField $issueField, array $paramArray = []): string
     {
         $issue = new Issue();
 
@@ -213,7 +213,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Comment Comment class
      */
-    public function addComment(string|int $issueIdOrKey, Comment $comment): Comment
+    public function addComment($issueIdOrKey, Comment $comment): Comment
     {
         $this->log->info("addComment=\n");
 
@@ -241,7 +241,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Comment Comment class
      */
-    public function updateComment(string|int $issueIdOrKey, string|int $comment_id, Comment $comment): Comment
+    public function updateComment($issueIdOrKey, $comment_id, Comment $comment): Comment
     {
         $this->log->info("updateComment=\n");
 
@@ -273,7 +273,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Comment Comment class
      */
-    public function getComment(string|int $issueIdOrKey, string|int $id, array $paramArray = []): Comment
+    public function getComment($issueIdOrKey, $id, array $paramArray = []): Comment
     {
         $this->log->info("getComment=\n");
 
@@ -324,7 +324,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string|bool
      */
-    public function deleteComment($issueIdOrKey, $id): string|bool
+    public function deleteComment($issueIdOrKey, $id)
     {
         $this->log->info("deleteComment=\n");
 
@@ -347,7 +347,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string
      */
-    public function changeAssigneeByAccountId(string|int $issueIdOrKey, ?string $accountId): string
+    public function changeAssigneeByAccountId($issueIdOrKey, ?string $accountId): string
     {
         $this->log->info("changeAssigneeByAccountId=\n");
 
@@ -370,7 +370,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string|bool
      */
-    public function deleteIssue(string|int $issueIdOrKey, array $paramArray = []): string|bool
+    public function deleteIssue($issueIdOrKey, array $paramArray = [])
     {
         $this->log->info("deleteIssue=\n");
 
@@ -393,7 +393,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Transition[] array of Transition class
      */
-    public function getTransition(string|int $issueIdOrKey, array $paramArray = []): ArrayObject
+    public function getTransition($issueIdOrKey, array $paramArray = []): ArrayObject
     {
         $queryParam = '?'.http_build_query($paramArray);
 
@@ -422,7 +422,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string
      */
-    public function findTransitonId(string|int $issueIdOrKey, string $transitionToName): string
+    public function findTransitonId($issueIdOrKey, string $transitionToName): string
     {
         $this->log->debug('findTransitonId=');
 
@@ -452,7 +452,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string|null nothing - if transition was successful return http 204(no contents)
      */
-    public function transition(string|int $issueIdOrKey, Transition $transition): ?string
+    public function transition($issueIdOrKey, Transition $transition): ?string
     {
         if (!isset($transition->transition['id'])) {
             if (isset($transition->transition['untranslatedName'])) {
@@ -522,7 +522,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return TimeTracking
      */
-    public function getTimeTracking(string|int $issueIdOrKey): TimeTracking
+    public function getTimeTracking($issueIdOrKey): TimeTracking
     {
         $ret = $this->exec($this->uri."/$issueIdOrKey", null);
         $this->log->debug("getTimeTracking res=$ret\n");
@@ -545,7 +545,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string
      */
-    public function timeTracking(string|int $issueIdOrKey, TimeTracking $timeTracking): string
+    public function timeTracking($issueIdOrKey, TimeTracking $timeTracking): string
     {
         $array = [
             'update' => [
@@ -574,7 +574,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return PaginatedWorklog
      */
-    public function getWorklog(string|int $issueIdOrKey, array $paramArray = []): PaginatedWorklog
+    public function getWorklog($issueIdOrKey, array $paramArray = []): PaginatedWorklog
     {
         $ret = $this->exec($this->uri."/$issueIdOrKey/worklog".$this->toHttpQueryParameter($paramArray));
 
@@ -597,7 +597,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Worklog PaginatedWorklog object
      */
-    public function getWorklogById(string|int $issueIdOrKey, int $workLogId): Worklog
+    public function getWorklogById($issueIdOrKey, int $workLogId): Worklog
     {
         $ret = $this->exec($this->uri."/$issueIdOrKey/worklog/$workLogId");
 
@@ -612,7 +612,7 @@ class IssueService extends \JiraCloud\JiraClient
     /**
      * add work log to issue.
      *
-     * @param string  $issueIdOrKey
+     * @param string|int  $issueIdOrKey
      * @param Worklog $worklog
      *
      * @throws \JsonMapper_Exception
@@ -620,7 +620,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Worklog Worklog Object
      */
-    public function addWorklog(string|int $issueIdOrKey, Worklog $worklog)
+    public function addWorklog($issueIdOrKey, Worklog $worklog)
     {
         $this->log->info("addWorklog=\n");
 
@@ -639,7 +639,7 @@ class IssueService extends \JiraCloud\JiraClient
     /**
      * edit the worklog.
      *
-     * @param string  $issueIdOrKey
+     * @param string|int  $issueIdOrKey
      * @param Worklog $worklog
      * @param int     $worklogId
      *
@@ -648,7 +648,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Worklog
      */
-    public function editWorklog(string|int $issueIdOrKey, Worklog $worklog, int $worklogId): Worklog
+    public function editWorklog($issueIdOrKey, Worklog $worklog, int $worklogId): Worklog
     {
         $this->log->info("editWorklog=\n");
 
@@ -674,7 +674,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return bool
      */
-    public function deleteWorklog(string|int $issueIdOrKey, int $worklogId): bool
+    public function deleteWorklog($issueIdOrKey, int $worklogId): bool
     {
         $this->log->info("deleteWorklog=\n");
 
@@ -760,7 +760,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return Reporter[]
      */
-    public function getWatchers(string|int $issueIdOrKey): ArrayObject
+    public function getWatchers($issueIdOrKey): ArrayObject
     {
         $this->log->info("getWatchers=\n");
 
@@ -785,7 +785,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return bool
      */
-    public function addWatcher(string|int $issueIdOrKey, string $watcher): bool
+    public function addWatcher($issueIdOrKey, string $watcher): bool
     {
         $this->log->info("addWatcher=\n");
 
@@ -808,7 +808,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return bool
      */
-    public function removeWatcher(string|int $issueIdOrKey, string $watcher): bool
+    public function removeWatcher($issueIdOrKey, string $watcher): bool
     {
         $this->log->debug("removeWatcher=\n");
 
@@ -829,7 +829,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return bool
      */
-    public function removeWatcherByAccountId(string|int $issueIdOrKey, string $accountId): bool
+    public function removeWatcherByAccountId($issueIdOrKey, string $accountId): bool
     {
         $this->log->debug("removeWatcher=\n");
 
@@ -909,7 +909,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @see https://docs.atlassian.com/software/jira/docs/api/REST/latest/#api/2/issue-notify
      */
-    public function notify(string|int $issueIdOrKey, Notify $notify)
+    public function notify($issueIdOrKey, Notify $notify)
     {
         $full_uri = $this->uri."/$issueIdOrKey/notify";
 
@@ -944,7 +944,7 @@ class IssueService extends \JiraCloud\JiraClient
      * @see https://developer.atlassian.com/server/jira/platform/jira-rest-api-for-remote-issue-links/
      * @see https://docs.atlassian.com/software/jira/docs/api/REST/latest/#api/2/issue-getRemoteIssueLinks
      */
-    public function getRemoteIssueLink(string|int $issueIdOrKey): ArrayObject
+    public function getRemoteIssueLink($issueIdOrKey): ArrayObject
     {
         $full_uri = $this->uri."/$issueIdOrKey/remotelink";
 
@@ -960,7 +960,7 @@ class IssueService extends \JiraCloud\JiraClient
     }
 
     /**
-     * @param string          $issueIdOrKey
+     * @param string|int          $issueIdOrKey
      * @param RemoteIssueLink $ril
      *
      * @throws \JsonMapper_Exception
@@ -968,7 +968,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return RemoteIssueLink
      */
-    public function createOrUpdateRemoteIssueLink(string|int $issueIdOrKey, RemoteIssueLink $ril): RemoteIssueLink
+    public function createOrUpdateRemoteIssueLink($issueIdOrKey, RemoteIssueLink $ril): RemoteIssueLink
     {
         $full_uri = $this->uri."/$issueIdOrKey/remotelink";
 
@@ -994,7 +994,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string|bool
      */
-    public function removeRemoteIssueLink(string|int $issueIdOrKey, string $globalId): string|bool
+    public function removeRemoteIssueLink($issueIdOrKey, string $globalId)
     {
         $query = http_build_query(['globalId' => $globalId]);
 
@@ -1078,7 +1078,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return bool
      */
-    public function updateLabels(string|int $issueIdOrKey, array $addLablesParam = [], array $removeLabelsParam = [], bool $notifyUsers = true): bool
+    public function updateLabels($issueIdOrKey, array $addLablesParam = [], array $removeLabelsParam = [], bool $notifyUsers = true): bool
     {
         $labels = [];
         if (count($addLablesParam) > 0) {
@@ -1123,7 +1123,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return bool
      */
-    public function updateFixVersions(string|int $issueIdOrKey, array $addFixVersionsParam, array $removeFixVersionsParam, bool $notifyUsers = true): bool
+    public function updateFixVersions($issueIdOrKey, array $addFixVersionsParam, array $removeFixVersionsParam, bool $notifyUsers = true): bool
     {
         $fixVersions = [];
         if (count($addFixVersionsParam) > 0) {
@@ -1163,7 +1163,7 @@ class IssueService extends \JiraCloud\JiraClient
      *
      * @return string
      */
-    public function findTransitonIdByUntranslatedName(string|int $issueIdOrKey, string $untranslatedName): string
+    public function findTransitonIdByUntranslatedName($issueIdOrKey, string $untranslatedName): string
     {
         $this->log->debug('findTransitonIdByUntranslatedName=');
 

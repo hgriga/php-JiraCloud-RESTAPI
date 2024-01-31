@@ -23,7 +23,7 @@ class UserService extends \JiraCloud\JiraClient
      *
      * @return User User class
      */
-    public function create(User|array $user): User
+    public function create($user): User
     {
         $data = json_encode($user);
 
@@ -234,7 +234,7 @@ class UserService extends \JiraCloud\JiraClient
      *
      * @return User User class
      */
-    public function update(array $paramArray, User|array $user): User
+    public function update(array $paramArray, $user): User
     {
         $queryParam = '?'.http_build_query($paramArray);
 

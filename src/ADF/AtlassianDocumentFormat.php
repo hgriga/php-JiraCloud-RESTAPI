@@ -18,7 +18,10 @@ class AtlassianDocumentFormat implements \JsonSerializable
 
     private ?Document $document = null;
 
-    public function __construct(Document|Node $document)
+    /**
+     * @param Document|Node $document
+     */
+    public function __construct($document)
     {
         $this->document = $document;
     }
@@ -29,7 +32,10 @@ class AtlassianDocumentFormat implements \JsonSerializable
         return $this->document->jsonSerialize();
     }
 
-    public function setDocument(Document|Node $document)
+    /**
+     * @param Document|Node $document
+     */
+    public function setDocument($document)
     {
         $this->document = $document;
     }

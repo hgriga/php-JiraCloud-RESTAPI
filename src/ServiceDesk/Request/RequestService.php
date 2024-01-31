@@ -204,9 +204,11 @@ class RequestService
      *                                  If the assigneeName is "-1" automatic assignee is used.
      *                                  A null name will remove the assignee.
      *
+     * @return string|bool
+     *
      * @throws JiraException|JsonException
      */
-    public function changeAssignee(string $issueIdOrKey, ?string $assigneeName): string|bool
+    public function changeAssignee(string $issueIdOrKey, ?string $assigneeName)
     {
         $this->logger->info("changeAssignee=\n");
 
@@ -248,9 +250,13 @@ class RequestService
     /**
      * Delete an issue.
      *
+     * @param string|int $issueIdOrKey
+     *
+     * @return string|bool
+     *
      * @throws JiraException
      */
-    public function deleteRequest(string|int $issueIdOrKey, array $paramArray = []): string|bool
+    public function deleteRequest($issueIdOrKey, array $paramArray = [])
     {
         $this->logger->info("deleteIssue=\n");
 
@@ -293,9 +299,11 @@ class RequestService
     /**
      * find transition id by transition's to field name(aka 'Resolved').
      *
+     * @param string|int $issueIdOrKey
+     *
      * @throws JiraException|JsonMapper_Exception|JsonException
      */
-    public function findTransitionId(string|int $issueIdOrKey, string $transitionToName): string
+    public function findTransitionId($issueIdOrKey, string $transitionToName): string
     {
         $this->logger->info('findTransitonId=');
 
@@ -472,9 +480,11 @@ class RequestService
     /**
      * delete worklog.
      *
+     * @param string|int $issueIdOrKey
+     *
      * @throws JiraException
      */
-    public function deleteWorklog(string|int $issueIdOrKey, int $worklogId): bool
+    public function deleteWorklog($issueIdOrKey, int $worklogId): bool
     {
         $this->logger->info("deleteWorklog=\n");
 
@@ -715,9 +725,11 @@ class RequestService
     }
 
     /**
+     * @return string|bool
+     *
      * @throws JiraException
      */
-    public function removeRemoteIssueLink(string $issueIdOrKey, string $globalId): string|bool
+    public function removeRemoteIssueLink(string $issueIdOrKey, string $globalId)
     {
         $query = http_build_query(['globalId' => $globalId]);
 
@@ -815,9 +827,11 @@ class RequestService
     /**
      * find transition id by transition's untranslatedName.
      *
+     * @param string|int $issueIdOrKey
+     *
      * @throws JiraException
      */
-    public function findTransitionIdByUntranslatedName(string|int $issueIdOrKey, string $untranslatedName): string
+    public function findTransitionIdByUntranslatedName($issueIdOrKey, string $untranslatedName): string
     {
         $this->logger->debug('findTransitonIdByUntranslatedName=');
 

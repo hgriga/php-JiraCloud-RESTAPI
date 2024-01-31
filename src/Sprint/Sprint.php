@@ -49,42 +49,45 @@ class Sprint implements \JsonSerializable
         return $this;
     }
 
-    public function setOriginBoardIdAsStringOrInt(string|int $originBoardId): self
+    /**
+     * @param string|int $originBoardId
+     */
+    public function setOriginBoardIdAsStringOrInt($originBoardId): self
     {
         $this->originBoardId = $originBoardId;
 
         return $this;
     }
 
-    public function setStartDateAsDateTime(\DateTimeInterface $startDate, string $format = 'Y-m-d'): static
+    public function setStartDateAsDateTime(\DateTimeInterface $startDate, string $format = 'Y-m-d'): self
     {
         $this->startDate = $startDate->format($format);
 
         return $this;
     }
 
-    public function setStartDateAsString(string $startDate): static
+    public function setStartDateAsString(string $startDate): self
     {
         $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function setEndDateAsDateTime(\DateTimeInterface $endDate, string $format = 'Y-m-d'): static
+    public function setEndDateAsDateTime(\DateTimeInterface $endDate, string $format = 'Y-m-d'): self
     {
         $this->endDate = $endDate->format($format);
 
         return $this;
     }
 
-    public function setEndDateAsString(string $endDate): static
+    public function setEndDateAsString(string $endDate): self
     {
         $this->endDate = $endDate;
 
         return $this;
     }
 
-    public function setMoveIssues(array $issues): static
+    public function setMoveIssues(array $issues): self
     {
         $this->issues = $issues;
 

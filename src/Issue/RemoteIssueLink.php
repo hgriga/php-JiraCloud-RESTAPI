@@ -27,7 +27,7 @@ class RemoteIssueLink implements \JsonSerializable
         $this->object = new RemoteObject();
     }
 
-    public function setUrl(string $url): static
+    public function setUrl(string $url): self
     {
         $this->globalId = $url;
         $this->object->url = $url;
@@ -35,21 +35,21 @@ class RemoteIssueLink implements \JsonSerializable
         return $this;
     }
 
-    public function setTitle($title): static
+    public function setTitle($title): self
     {
         $this->object->title = $title;
 
         return $this;
     }
 
-    public function setSummary($summary): static
+    public function setSummary($summary): self
     {
         $this->object->summary = $summary;
 
         return $this;
     }
 
-    public function setRelationship($relationship): static
+    public function setRelationship($relationship): self
     {
         $this->relationship = $relationship;
 

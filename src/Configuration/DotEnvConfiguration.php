@@ -84,8 +84,9 @@ class DotEnvConfiguration extends AbstractConfiguration
 
     /**
      * Determine if a given string starts with a given substring.
+     * @param array|string $needles
      */
-    public function startsWith(string $haystack, array|string $needles): bool
+    public function startsWith(string $haystack, $needles): bool
     {
         foreach ((array) $needles as $needle) {
             if ($needle != '' && strpos($haystack, $needle) === 0) {
@@ -98,8 +99,9 @@ class DotEnvConfiguration extends AbstractConfiguration
 
     /**
      * Determine if a given string ends with a given substring.
+     * @param array|string $needles
      */
-    public function endsWith(string $haystack, array|string $needles): bool
+    public function endsWith(string $haystack, $needles): bool
     {
         foreach ((array) $needles as $needle) {
             if ((string) $needle === substr($haystack, -strlen($needle))) {

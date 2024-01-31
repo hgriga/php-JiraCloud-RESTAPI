@@ -14,14 +14,14 @@ class VersionUnresolvedCount implements \JsonSerializable
         return array_filter(get_object_vars($this));
     }
 
-    public function setSelf(string $self): static
+    public function setSelf(string $self): self
     {
         $this->self = $self;
 
         return $this;
     }
 
-    public function setIssuesUnresolvedCount(int $issuesUnresolvedCount): static
+    public function setIssuesUnresolvedCount(int $issuesUnresolvedCount): self
     {
         $this->issuesUnresolvedCount = $issuesUnresolvedCount;
 

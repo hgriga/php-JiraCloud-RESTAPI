@@ -37,7 +37,10 @@ class SprintService extends JiraClient
         return $sprint;
     }
 
-    public function getSprint(string|int $sprintId): Sprint
+    /**
+     * @param string|int $sprintId
+     */
+    public function getSprint($sprintId): Sprint
     {
         $ret = $this->exec($this->uri.'/'.$sprintId, null);
 
@@ -50,6 +53,8 @@ class SprintService extends JiraClient
     }
 
     /**
+     * @param string|int $sprintId
+     *
      * @throws JiraException
      * @throws \JsonMapper_Exception
      *
@@ -57,7 +62,7 @@ class SprintService extends JiraClient
      *
      * @see https://developer.atlassian.com/cloud/jira/software/rest/api-group-sprint/#api-rest-agile-1-0-sprint-sprintid-get
      */
-    public function getSprintIssues(string|int $sprintId, array $paramArray = [])
+    public function getSprintIssues($sprintId, array $paramArray = [])
     {
         $json = $this->exec($this->uri.'/'.$sprintId.'/issue'.$this->toHttpQueryParameter($paramArray), null);
 

@@ -22,8 +22,9 @@ class JiraClient
 
     /**
      * HTTP response code.
+     * @var string|int
      */
-    protected string|int $http_response;
+    protected $http_response;
 
     /**
      * JIRA REST API URI.
@@ -128,7 +129,7 @@ class JiraClient
      *
      * @return array
      */
-    public function curlPrepare(\CurlHandle|bool $ch, array $curl_http_headers, ?string $cookieFile): array
+    public function curlPrepare(bool $ch, array $curl_http_headers, ?string $cookieFile): array
     {
         $this->authorization($ch, $curl_http_headers, $cookieFile);
 
@@ -185,7 +186,7 @@ class JiraClient
      *
      * @return string|bool
      */
-    public function exec(string $context, array|string $post_data = null, string $custom_request = null, string $cookieFile = null): string|bool
+    public function exec(string $context, $post_data = null, string $custom_request = null, string $cookieFile = null)
     {
         $url = $this->createUrlByContext($context);
 
@@ -549,7 +550,7 @@ class JiraClient
     /**
      * setting cookie file path.
      */
-    public function setCookieFile(string $cookieFile): static
+    public function setCookieFile(string $cookieFile): self
     {
         $this->cookieFile = $cookieFile;
 
@@ -575,7 +576,7 @@ class JiraClient
     /**
      * setting JSON en/decoding options.
      */
-    public function setJsonOptions(int $jsonOptions): static
+    public function setJsonOptions(int $jsonOptions): self
     {
         $this->jsonOptions = $jsonOptions;
 
@@ -590,7 +591,10 @@ class JiraClient
         return $this->jsonOptions;
     }
 
-    public function getHttpResponse(): string|int
+    /**
+     * @return int|string
+     */
+    public function getHttpResponse()
     {
         return $this->http_response;
     }

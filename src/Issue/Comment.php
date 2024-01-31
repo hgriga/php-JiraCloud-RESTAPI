@@ -37,21 +37,23 @@ class Comment implements \JsonSerializable
      *
      * @return $this
      */
-    public function setBody(\stdClass $body): static
+    public function setBody(\stdClass $body): self
     {
         $this->body = json_decode(json_encode($body), true);
 
         return $this;
     }
 
-    public function setBodyByAtlassianDocumentFormat(Document|Node $body): static
+    /**
+     * @param Document|Node $body
+     */
+    public function setBodyByAtlassianDocumentFormat($body): self
     {
         $this->body = $body->jsonSerialize();
 
         return $this;
     }
 
-    #[\ReturnTypeWillChange]
     public function jsonSerialize(): array
     {
         return array_filter(get_object_vars($this), function ($var) {

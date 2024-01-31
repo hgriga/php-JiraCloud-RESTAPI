@@ -47,7 +47,7 @@ class Worklog
     /**
      * Function to set comments.
      */
-    public function setComment(AtlassianDocumentFormat $comment): static
+    public function setComment(AtlassianDocumentFormat $comment): self
     {
         $this->comment = $comment;
 
@@ -64,7 +64,7 @@ class Worklog
      *
      * @return $this
      */
-    public function setStarted(mixed $started): static
+    public function setStarted(mixed $started): self
     {
         if (is_string($started)) {
             $dt = new \DateTime($started);
@@ -87,7 +87,7 @@ class Worklog
      *
      * @return Worklog
      */
-    public function setStartedDateTime(DateTimeInterface $started): static
+    public function setStartedDateTime(DateTimeInterface $started): self
     {
         // workround micro second
         $this->started = $started->format("Y-m-d\TH:i:s").'.000'.$started->format('O');
@@ -100,7 +100,7 @@ class Worklog
      *
      * @param string $timeSpent
      */
-    public function setTimeSpent(string $timeSpent): static
+    public function setTimeSpent(string $timeSpent): self
     {
         $this->timeSpent = $timeSpent;
 
@@ -114,7 +114,7 @@ class Worklog
      *
      * @return Worklog
      */
-    public function setTimeSpentSeconds(int $timeSpentSeconds): static
+    public function setTimeSpentSeconds(int $timeSpentSeconds): self
     {
         $this->timeSpentSeconds = $timeSpentSeconds;
 

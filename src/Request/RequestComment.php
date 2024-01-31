@@ -16,14 +16,14 @@ class RequestComment implements \JsonSerializable
 
     public ?DateTimeInterface $created;
 
-    public function setBody(string $body): static
+    public function setBody(string $body): self
     {
         $this->body = $body;
 
         return $this;
     }
 
-    public function setIsPublic(bool $public): static
+    public function setIsPublic(bool $public): self
     {
         $this->public = $public;
 

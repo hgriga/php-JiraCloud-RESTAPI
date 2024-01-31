@@ -42,49 +42,49 @@ class Component implements \JsonSerializable
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function setDescription($description): static
+    public function setDescription($description): self
     {
         $this->description = $description;
 
         return $this;
     }
 
-    public function setLeadUserName(string $leadUserName): static
+    public function setLeadUserName(string $leadUserName): self
     {
         $this->leadUserName = $leadUserName;
 
         return $this;
     }
 
-    public function setAssigneeType(string $assigneeType): static
+    public function setAssigneeType(string $assigneeType): self
     {
         $this->assigneeType = $assigneeType;
 
         return $this;
     }
 
-    public function setAssigneeTypeAsEnum(AssigneeTypeEnum $assigneeType): static
+    public function setAssigneeTypeAsEnum(AssigneeTypeEnum $assigneeType): self
     {
         $this->assigneeType = $assigneeType->type();
 
         return $this;
     }
 
-    public function setProjectKey(string $projectKey): static
+    public function setProjectKey(string $projectKey): self
     {
         $this->project = $projectKey;
 
         return $this;
     }
 
-    public function setProject(string $project): static
+    public function setProject(string $project): self
     {
         $this->project = $project;
 

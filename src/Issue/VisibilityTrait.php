@@ -4,14 +4,14 @@ namespace JiraCloud\Issue;
 
 trait VisibilityTrait
 {
-    public function setVisibility(Visibility $type): static
+    public function setVisibility(Visibility $type): self
     {
         $this->visibility = $type;
 
         return $this;
     }
 
-    public function setVisibilityAsArray(array $array): static
+    public function setVisibilityAsArray(array $array): self
     {
         if (is_null($this->visibility)) {
             $this->visibility = new Visibility();
@@ -23,7 +23,7 @@ trait VisibilityTrait
         return $this;
     }
 
-    public function setVisibilityAsString(string $type, string $value): static
+    public function setVisibilityAsString(string $type, string $value): self
     {
         if (is_null($this->visibility)) {
             $this->visibility = new Visibility();

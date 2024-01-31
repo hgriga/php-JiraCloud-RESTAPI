@@ -157,7 +157,11 @@ class IssueField implements \JsonSerializable
         return $this->customFields;
     }
 
-    public function addCustomField(string $key, string|int|float|array|Document|null $value): static
+    /**
+     * @param string $key
+     * @param string|int|float|array|Document|null $value
+     */
+    public function addCustomField(string $key, $value): self
     {
         $this->customFields[$key] = $value;
 
@@ -174,14 +178,14 @@ class IssueField implements \JsonSerializable
         return $this->project->id;
     }
 
-    public function setProjectKey(string $key): static
+    public function setProjectKey(string $key): self
     {
         $this->project->key = $key;
 
         return $this;
     }
 
-    public function setProjectId(string $id): static
+    public function setProjectId(string $id): self
     {
         $this->project->id = $id;
 
@@ -198,7 +202,7 @@ class IssueField implements \JsonSerializable
     /**
      * set issue reporter name.
      */
-    public function setReporterName(string $name): static
+    public function setReporterName(string $name): self
     {
         if (is_null($this->reporter)) {
             $this->reporter = new Reporter();
@@ -212,7 +216,7 @@ class IssueField implements \JsonSerializable
     /**
      * set issue reporter accountId.
      */
-    public function setReporterAccountId(string $accountId): static
+    public function setReporterAccountId(string $accountId): self
     {
         if (is_null($this->reporter)) {
             $this->reporter = new Reporter();
@@ -226,7 +230,7 @@ class IssueField implements \JsonSerializable
     /**
      * set issue assignee name.
      */
-    public function setAssigneeNameAsString(string $name): static
+    public function setAssigneeNameAsString(string $name): self
     {
         if ($this->assignee === null) {
             $this->assignee = new Reporter();
@@ -240,7 +244,7 @@ class IssueField implements \JsonSerializable
     /**
      * set issue assignee accountId.
      */
-    public function setAssigneeAccountId(string $accountId): static
+    public function setAssigneeAccountId(string $accountId): self
     {
         if (is_null($this->assignee)) {
             $this->assignee = new Reporter();
@@ -258,7 +262,7 @@ class IssueField implements \JsonSerializable
     /**
      * set issue priority name.
      */
-    public function setPriorityNameAsString(string $name): static
+    public function setPriorityNameAsString(string $name): self
     {
         if ($this->priority === null) {
             $this->priority = new Priority();
@@ -274,7 +278,7 @@ class IssueField implements \JsonSerializable
      *
      * REST API V3 must use addDescriptionXXXX
      */
-    public function setDescription(?AtlassianDocumentFormat $description): static
+    public function setDescription(?AtlassianDocumentFormat $description): self
     {
         if (!empty($description)) {
             $this->description = $description;
@@ -286,7 +290,7 @@ class IssueField implements \JsonSerializable
     /**
      * add a Affects version.
      */
-    public function addVersionAsString(string $version): static
+    public function addVersionAsString(string $version): self
     {
         if (is_null($this->versions)) {
             $this->versions = [];
@@ -297,7 +301,7 @@ class IssueField implements \JsonSerializable
         return $this;
     }
 
-    public function addVersionAsArray(array $version): static
+    public function addVersionAsArray(array $version): self
     {
         if (is_null($this->versions)) {
             $this->versions = [];
@@ -313,7 +317,7 @@ class IssueField implements \JsonSerializable
     /**
      * add issue label.
      */
-    public function addLabelAsString(string $label): static
+    public function addLabelAsString(string $label): self
     {
         $this->labels[] = $label;
 
@@ -325,7 +329,7 @@ class IssueField implements \JsonSerializable
      *
      * @param string $issueTypeName IssueType as string(for example,Bug, Task, etc..)
      */
-    public function setIssueTypeAsString(string $issueTypeName): static
+    public function setIssueTypeAsString(string $issueTypeName): self
     {
         $this->issuetype = new IssueType();
 
@@ -334,7 +338,7 @@ class IssueField implements \JsonSerializable
         return $this;
     }
 
-    public function setIssueType(IssueType $issueType): static
+    public function setIssueType(IssueType $issueType): self
     {
         $this->issuetype = $issueType;
 
@@ -349,7 +353,7 @@ class IssueField implements \JsonSerializable
     /**
      *  set parent issue.
      */
-    public function setParentKeyOrId(string $keyOrId): static
+    public function setParentKeyOrId(string $keyOrId): self
     {
         if (is_null($this->parent)) {
             $this->parent = new Issue();
@@ -372,7 +376,7 @@ class IssueField implements \JsonSerializable
     /**
      * add issue component.
      */
-    public function addComponentsAsArray(array $component): static
+    public function addComponentsAsArray(array $component): self
     {
         foreach ($component as $c) {
             $this->components[] = new Component($c);
@@ -381,7 +385,7 @@ class IssueField implements \JsonSerializable
         return $this;
     }
 
-    public function addComponentAsString(string $component): static
+    public function addComponentAsString(string $component): self
     {
         $this->components[] = new Component($component);
 
@@ -391,7 +395,7 @@ class IssueField implements \JsonSerializable
     /**
      * set security level.
      */
-    public function setSecurityId(int $issue_security_id): static
+    public function setSecurityId(int $issue_security_id): self
     {
         if (empty($this->security)) {
             $this->security = new SecurityScheme();
@@ -405,14 +409,14 @@ class IssueField implements \JsonSerializable
     /**
      * set issue's due date.
      */
-    public function setDueDateAsString(string $duedate): static
+    public function setDueDateAsString(string $duedate): self
     {
         $this->duedateString = $duedate;
 
         return $this;
     }
 
-    public function setDueDateAsDateTime(DateTimeInterface $duedate, $format = 'Y-m-d'): static
+    public function setDueDateAsDateTime(DateTimeInterface $duedate, $format = 'Y-m-d'): self
     {
         $this->duedateString = $duedate->format($format);
 
@@ -424,7 +428,7 @@ class IssueField implements \JsonSerializable
      *
      * @see https://confluence.atlassian.com/jirakb/how-to-set-assignee-to-unassigned-via-rest-api-in-jira-744721880.html
      */
-    public function setAssigneeToUnassigned(): static
+    public function setAssigneeToUnassigned(): self
     {
         if (is_null($this->assignee)) {
             $this->assignee = new Reporter();
@@ -435,7 +439,7 @@ class IssueField implements \JsonSerializable
         return $this;
     }
 
-    public function setAssigneeToDefault(): static
+    public function setAssigneeToDefault(): self
     {
         if (is_null($this->assignee)) {
             $this->assignee = new Reporter();
@@ -451,7 +455,7 @@ class IssueField implements \JsonSerializable
      *
      * @return $this
      */
-    public function addDescriptionParagraph(string $text, ADFMarkType $markType): static
+    public function addDescriptionParagraph(string $text, ADFMarkType $markType): self
     {
         if (empty($this->description)) {
             $this->description = new AtlassianDocumentFormat();
